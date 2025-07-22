@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - Namaz Tracker</title>
+  <link rel="stylesheet" href="styleindex.css">
+</head>
+<body>
+  <h2>Login</h2>
+  <input type="email" id="email" placeholder="Email">
+  <input type="password" id="password" placeholder="Password">
+  <button id="loginBtn">Login</button>
+  <p>New user? <a href="register.html">Sign up</a></p>
+
+  <script type="module">
+    import { auth, signInWithEmailAndPassword } from './firebase.js';
+
+    document.getElementById('loginBtn').addEventListener('click', async () => {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        window.location.href = 'dashboard.html';
+      } catch (error) {
+        alert("Invalid credentials or user not found.");
+      }
+    });
+  </script>
+</body>
+</html>

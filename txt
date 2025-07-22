@@ -1,0 +1,187 @@
+Reset and Base Styles
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f9ff;
+  color: #2c3e50;
+  min-height: 100vh;
+  padding-top: 70px; /* space for fixed navbar */
+}
+
+/* Navbar */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #3498db;
+  color: white;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.navbar h1 {
+  font-size: 22px;
+}
+
+.navbar a,
+.navbar button {
+  color: white;
+  text-decoration: none;
+  background: none;
+  border: none;
+  font-size: 16px;
+  margin-left: 20px;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.navbar a:hover,
+.navbar button:hover {
+  opacity: 0.8;
+}
+
+/* Form Group */
+.form-group {
+  max-width: 450px;
+  margin: auto;
+  padding: 30px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.form-group label {
+  margin-top: 15px;
+  font-weight: 600;
+}
+
+input,
+select,
+button {
+  padding: 10px;
+  margin-top: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  width: 100%;
+}
+
+button {
+  background-color: #3498db;
+  color: white;
+  font-weight: bold;
+  margin-top: 20px;
+  border: none;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background-color: #2980b9;
+}
+
+/* Page Titles */
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 26px;
+}
+
+/* Login Link */
+.login-link {
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Namaz Buttons */
+#namazList div {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+#namazList button {
+  min-width: 200px;
+}
+
+/* History Section */
+#history,
+#history-container {
+  max-width: 850px;
+  margin: auto;
+  padding: 20px;
+}
+
+.day-box {
+  background: white;
+  padding: 15px 20px;
+  border-left: 5px solid #3498db;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.day-box h3 {
+  margin-bottom: 10px;
+}
+
+.prayers span {
+  display: inline-block;
+  margin-right: 12px;
+  font-weight: 600;
+}
+
+.cross {
+  color: red;
+}
+
+/* History Buttons */
+.btn {
+  padding: 10px 15px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  margin-right: 10px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #2980b9;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 600px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .navbar h1 {
+    margin-bottom: 10px;
+  }
+
+  .navbar a,
+  .navbar button {
+    margin: 8px 0 0 0;
+  }
+
+  #namazList button {
+    width: 100%;
+  }
+
+  .prayers span {
+    display: block;
+    margin-bottom: 6px;
+  }
+}

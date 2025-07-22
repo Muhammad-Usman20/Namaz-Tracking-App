@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Namaz History</title>
+    <link rel="stylesheet" href="stylehis.css">
+</head>
+
+<body>
+    <div class="navbar">
+        <h1>Namaz Tracker</h1>
+        <div>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="history.html">History</a>
+            <!-- <button id="logoutBtn">Logout</button> -->
+            <button onclick="logout()" id="logoutBtn">Logout</button>
+        </div>
+    </div>
+
+    <h2>Past Namaz Records</h2>
+    <div id="history"></div>
+    <!-- <a href="dashboard.html">Back to Dashboard</a> -->
+
+    <script type="module">
+        import {
+            auth, db, onAuthStateChanged, collection, getDocs
+        } from './firebase.js';
+
+        const prayers = ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"];
+
+        onAuthStateChanged(auth, async (user) => {
+            if (!user) {
+                window.location.href = "index.html";
+                return;
+            }
+
+            const querySnapshot = await getDocs(collection(db, "prayers"));
+            const container = document.getElementById("history");
+
+            querySnapshot.forEach((docSnap) => {
+                if (docSnap.id.startsWith(user.uid)) {
+                    const data = docSnap.data();
+                    const div = document.createElement("div");
+                    div.innerHTML = `<strong>${data.date}</strong><br>`;
+                    prayers.forEach(p => {
+                        div.innerHTML += `${p}: ${data[p] ? '✅' : '❌'}<br>`;
+                    });
+                    div.innerHTML += "<hr>";
+                    container.appendChild(div);
+                }
+            });
+        });
+    </script>
+    <script type="module">
+        import { auth, signOut } from './firebase.js';
+        window.logout = () => {
+            signOut(auth).then(() => {
+                window.location.href = 'index.html';
+            });
+        };
+    </script>
+
+    <script src="app.js"></script>
+
+</body>
+
+</html>
+
+
+
+
+<!-- history.html -->
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Namaz Tracker - History</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            background-color: #2c3e50;
+            padding: 10px 20px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar h1 {
+            margin: 0;
+        }
+
+        .navbar a {
+            color: white;
+            margin-left: 15px;
+            text-decoration: none;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .btn {
+            margin: 10px 5px;
+            padding: 10px 15px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .day-box {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+
+        .prayers span {
+            margin-right: 10px;
+        }
+
+        .cross {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="navbar">
+        <h1>Namaz Tracker</h1>
+        <div>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="history.html">History</a>
+            <a href="#" onclick="logout()">Logout</a>
+        </div>
+    </div>
+
+    <div class="content">
+        <button class="btn" onclick="loadHistory(7)">View 7 Days History</button>
+        <button class="btn" onclick="loadHistory(30)">View 30 Days History</button>
+
+        <div id="history-container"></div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBCMkDB4Wblx5Lhqblv-zDcrwWz1kPfApg",
+            authDomain: "web-dev-course-42f1f.firebaseapp.com",
+            projectId: "web-dev-course-42f1f",
+            storageBucket: "web-dev-course-42f1f.firebasestorage.app",
+            messagingSenderId: "695312263707",
+            appId: "1:695312263707:web:055cdd95a818c37c0066be"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        const logout = () => {
+            signOut(auth).then(() => {
+                window.location.href = "login.html";
+            });
+        };
+
+        const loadHistory = async (days) => {
+            const container = document.getElementById('history-container');
+            container.innerHTML = '';
+
+            const today = new Date();
+
+            onAuthStateChanged(auth, async (user) => {
+                if (!user) {
+                    window.location.href = "login.html";
+                } else {
+                    for (let i = 0; i < days; i++) {
+                        const date = new Date();
+                        date.setDate(today.getDate() - i);
+                        const dateStr = date.toISOString().split('T')[0];
+                        const dayStr = date.toLocaleDateString('en-US', { weekday: 'long' });
+
+                        const docRef = doc(db, "prayers", `${user.uid}_${dateStr}`);
+                        const docSnap = await getDoc(docRef);
+
+                        const prayers = {
+                            Fajr: false,
+                            Dhuhr: false,
+                            Asr: false,
+                            Maghrib: false,
+                            Isha: false
+                        };
+
+                        if (docSnap.exists()) {
+                            const data = docSnap.data();
+                            Object.assign(prayers, data);
+                        }
+
+                        container.innerHTML += `
+              <div class="day-box">
+                <h3>${dayStr}, ${dateStr}</h3>
+                <div class="prayers">
+                  <span>Fajr: ${prayers.Fajr ? '✅' : '<span class="cross">❌</span>'}</span>
+                  <span>Dhuhr: ${prayers.Dhuhr ? '✅' : '<span class="cross">❌</span>'}</span>
+                  <span>Asr: ${prayers.Asr ? '✅' : '<span class="cross">❌</span>'}</span>
+                  <span>Maghrib: ${prayers.Maghrib ? '✅' : '<span class="cross">❌</span>'}</span>
+                  <span>Isha: ${prayers.Isha ? '✅' : '<span class="cross">❌</span>'}</span>
+                </div>
+              </div>
+            `;
+                    }
+                }
+            });
+        };
+    </script>
+</body>
+
+</html> -->
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Prayer History - Namaz Tracker</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="navbar">
+    <h2>Namaz Tracker</h2>
+    <nav>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="history.html">History</a>
+      <button onclick="logout()">Logout</button>
+    </nav>
+  </div>
+
+  <div class="container">
+    <h2>Prayer History</h2>
+    <button onclick="loadHistory(7)">Last 7 Days</button>
+    <button onclick="loadHistory(30)">Last 30 Days</button>
+    <div id="history"></div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js"></script>
+  <script src="firebase-config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html> -->
