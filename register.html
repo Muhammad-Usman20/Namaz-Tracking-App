@@ -1,20 +1,20 @@
-    <!DOCTYPE html>
-    <html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <title>Register - Namaz Tracker</title>
-        <link rel="stylesheet" href="style.css">
-        <style>
+<head>
+    <meta charset="UTF-8">
+    <title>Register - Namaz Tracker</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- <style>
             body {
                 font-family: Arial, sans-serif;
                 padding: 30px;
-                background: #f0f4f8;
+                background: #d4eafe;
             }
 
             h2 {
                 text-align: center;
-                color: #333;
+                color: #298283;
             }
 
             .form-group {
@@ -35,27 +35,27 @@
             }
 
             button {
-                background-color: #28a745;
-                color: white;
+                background-color: #15a79a;
+                color: rgb(0, 0, 0);
                 font-weight: bold;
                 cursor: pointer;
                 margin-top: 20px;
             }
 
             button:hover {
-                background-color: #218838;
+                background-color: #2efceb;
             }
 
             .login-link {
                 text-align: center;
                 margin-top: 15px;
             }
-        </style>
-    </head>
+        </style> -->
+</head>
 
-    <body>
+<body>
 
-        <h2 >Create an Account</h2>
+    <!-- <h2 >Create an Account</h2>
 
         <div class="form-group">
             <label>First Name</label>
@@ -91,66 +91,104 @@
 
         <div class="login-link">
             Already have an account? <a href="index.html">Login here</a>
+        </div> -->
+
+    <div class="form-group">
+        <h2>Create an Account</h2>
+
+        <label>First Name</label>
+        <input type="text" id="firstName" placeholder="Enter your first name">
+
+        <label>Last Name</label>
+        <input type="text" id="lastName" placeholder="Enter your last name">
+
+        <label>Age</label>
+        <input type="number" id="age" placeholder="Enter your age">
+
+        <label>Email</label>
+        <input type="email" id="email" placeholder="Enter your email">
+
+        <label>Password</label>
+        <input type="password" id="password" placeholder="Enter your password">
+
+        <label>Confirm Password</label>
+        <input type="password" id="confirmPassword" placeholder="Confirm your password">
+
+        <label>Nationality</label>
+        <input type="text" id="nationality" placeholder="Enter your nationality">
+
+        <label>Gender</label>
+        <select id="gender">
+            <option value="">Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select>
+
+        <button id="signupBtn">Sign Up</button>
+
+        <div class="login-link">
+            Already have an account? <a href="index.html">Login here</a>
         </div>
+    </div>
 
-        <script type="module">
-            import {
-                auth,
-                db,
-                createUserWithEmailAndPassword,
-                doc,
-                setDoc
-            } from './firebase.js';
+    <script type="module">
+        import {
+            auth,
+            db,
+            createUserWithEmailAndPassword,
+            doc,
+            setDoc
+        } from './firebase.js';
 
-            document.getElementById('signupBtn').addEventListener('click', async () => {
-                const firstName = document.getElementById('firstName').value.trim();
-                const lastName = document.getElementById('lastName').value.trim();
-                const age = document.getElementById('age').value.trim();
-                const email = document.getElementById('email').value.trim();
-                const password = document.getElementById('password').value;
-                const confirmPassword = document.getElementById('confirmPassword').value;
-                const nationality = document.getElementById('nationality').value.trim();
-                const gender = document.getElementById('gender').value;
+        document.getElementById('signupBtn').addEventListener('click', async () => {
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
+            const age = document.getElementById('age').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const nationality = document.getElementById('nationality').value.trim();
+            const gender = document.getElementById('gender').value;
 
-                if (!firstName || !lastName || !age || !email || !password || !confirmPassword || !nationality || !gender) {
-                    alert("Please fill in all fields.");
-                    return;
-                }
+            if (!firstName || !lastName || !age || !email || !password || !confirmPassword || !nationality || !gender) {
+                alert("Please fill in all fields.");
+                return;
+            }
 
-                if (password !== confirmPassword) {
-                    alert("Passwords do not match.");
-                    return;
-                }
+            if (password !== confirmPassword) {
+                alert("Passwords do not match.");
+                return;
+            }
 
-                try {
-                    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-                    const user = userCredential.user;
+            try {
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
 
-                    // Save additional info in Firestore
-                    await setDoc(doc(db, "users_info", user.uid), {
-                        uid: user.uid,
-                        firstName,
-                        lastName,
-                        age,
-                        email,
-                        nationality,
-                        gender,
-                        createdAt: new Date().toISOString()
-                    });
+                // Save additional info in Firestore
+                await setDoc(doc(db, "users_info", user.uid), {
+                    uid: user.uid,
+                    firstName,
+                    lastName,
+                    age,
+                    email,
+                    nationality,
+                    gender,
+                    createdAt: new Date().toISOString()
+                });
 
-                    alert("Registration successful!");
-                    window.location.href = 'dashboard.html';
+                alert("Registration successful!");
+                window.location.href = 'dashboard.html';
 
-                } catch (error) {
-                    alert("Signup failed: " + error.message);
-                    console.error(error);
-                }
-            });
-        </script>
+            } catch (error) {
+                alert("Signup failed: " + error.message);
+                console.error(error);
+            }
+        });
+    </script>
 
-    </body>
+</body>
 
-    </html>
+</html>
 
 
 

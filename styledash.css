@@ -5,95 +5,98 @@
   box-sizing: border-box;
 }
 
+/* Body styling */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(to bottom right, #e0f7fa, #ffffff);
-  min-height: 100vh;
-  padding: 0 20px;
+  background: linear-gradient(135deg, #e0f7fa, #ffffff);
+  padding: 0;
+  margin: 0;
 }
 
-/* Navbar Styles */
+/* Navbar */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #00b4d8;
-  padding: 15px 30px;
-  border-radius: 0 0 12px 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #2980b9;
+  padding: 15px 25px;
   color: white;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
+  flex-wrap: wrap;
 }
 
 .navbar h1 {
   font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
 .navbar a,
 .navbar button {
-  margin-left: 20px;
+  color: white;
+  text-decoration: none;
+  margin-left: 15px;
+  font-size: 16px;
   background: none;
   border: none;
-  color: white;
-  font-size: 16px;
   cursor: pointer;
-  text-decoration: none;
-  transition: 0.3s ease;
+  transition: color 0.3s ease;
 }
 
 .navbar a:hover,
 .navbar button:hover {
   text-decoration: underline;
+  color: #dff3ff;
 }
 
-/* Content */
+/* Heading for today's namaz */
 h2 {
   text-align: center;
-  margin: 30px 0 10px;
-  color: #0077b6;
+  margin-top: 30px;
+  font-size: 28px;
+  color: #2c3e50;
 }
 
+/* Today's date */
 #today {
   text-align: center;
   font-size: 18px;
-  margin-bottom: 20px;
-  color: #333;
+  margin-top: 10px;
+  color: #34495e;
 }
 
-/* Namaz List Container */
+/* Namaz list container */
 #namazList {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 15px;
-  background-color: #ffffff;
+  margin: 30px auto;
+  max-width: 700px;
+  padding: 20px;
+  background-color: #f9f9f9;
   border-radius: 12px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Responsive */
+/* Responsive navbar layout */
 @media (max-width: 600px) {
   .navbar {
     flex-direction: column;
     align-items: flex-start;
   }
 
-  .navbar div {
-    margin-top: 10px;
+  .navbar h1 {
+    margin-bottom: 10px;
   }
 
   .navbar a,
   .navbar button {
-    margin-left: 0;
-    margin-right: 15px;
+    margin: 5px 0 0 0;
+    padding: 5px 0;
   }
 
   h2 {
-    font-size: 20px;
+    font-size: 24px;
   }
 
-  #today {
-    font-size: 16px;
+  #namazList {
+    padding: 15px;
+    margin: 20px;
   }
 }

@@ -1,62 +1,76 @@
-/* Login form container */
-.login-container {
-  background: #ffffff;
-  padding: 30px 40px;
+/* Reset default styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #c3ecf9, #a1c4fd);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Container styling */
+form {
+  background-color: #ffffff;
+  padding: 30px 25px;
   border-radius: 15px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
   width: 100%;
   max-width: 400px;
   text-align: center;
 }
 
-h2 {
-  color: #0077b6;
-  margin-bottom: 25px;
+/* Heading */
+form h2 {
+  margin-bottom: 20px;
+  color: #2c3e50;
+  font-size: 26px;
 }
 
-input {
+/* Input fields */
+input[type="email"],
+input[type="password"] {
   width: 100%;
-  padding: 10px;
+  padding: 12px 15px;
   margin: 10px 0;
-  border: 1px solid #ccc;
+  border: 1px solid #ddd;
   border-radius: 8px;
-  font-size: 14px;
-  transition: 0.3s ease;
+  font-size: 16px;
 }
 
-input:focus {
-  outline: none;
-  border-color: #00b4d8;
-  box-shadow: 0 0 5px rgba(0, 180, 216, 0.3);
-}
-
+/* Button styling */
 button {
   width: 100%;
   padding: 12px;
-  background-color: #00b4d8;
+  background-color: #2980b9;
+  color: white;
   border: none;
   border-radius: 8px;
-  color: white;
   font-size: 16px;
-  margin-top: 15px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 button:hover {
-  background-color: #0077b6;
+  background-color: #2471a3;
 }
 
+/* Paragraph and link */
 p {
-  margin-top: 20px;
+  margin-top: 15px;
   font-size: 14px;
-  color: #333;
+  color: #555;
 }
 
 p a {
-  color: #0077b6;
+  color: #2980b9;
   text-decoration: none;
-  font-weight: bold;
 }
 
 p a:hover {
@@ -64,8 +78,17 @@ p a:hover {
 }
 
 /* Responsive */
-@media (max-width: 500px) {
-  .login-container {
+@media (max-width: 480px) {
+  form {
     padding: 20px;
+    border-radius: 10px;
+  }
+
+  form h2 {
+    font-size: 22px;
+  }
+
+  button {
+    font-size: 15px;
   }
 }

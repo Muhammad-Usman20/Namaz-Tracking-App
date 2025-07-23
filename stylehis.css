@@ -1,116 +1,153 @@
-/* Reset default styles */
+/* Reset */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* Body */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(to bottom right, #e0f7fa, #ffffff);
+  background: linear-gradient(135deg, #e0f7fa, #ffffff);
   min-height: 100vh;
-  padding: 0 20px;
+  padding: 0;
 }
 
-/* Navbar Styles */
+/* Navbar */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #00b4d8;
-  padding: 15px 30px;
-  border-radius: 0 0 12px 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #2980b9;
   color: white;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
+  padding: 15px 25px;
+  flex-wrap: wrap;
 }
 
 .navbar h1 {
   font-size: 24px;
+  font-weight: bold;
 }
 
 .navbar a,
 .navbar button {
-  margin-left: 20px;
+  color: white;
+  text-decoration: none;
+  margin-left: 15px;
+  font-size: 16px;
   background: none;
   border: none;
-  color: white;
-  font-size: 16px;
   cursor: pointer;
-  text-decoration: none;
-  transition: 0.3s ease;
+  transition: color 0.3s ease;
 }
 
 .navbar a:hover,
 .navbar button:hover {
   text-decoration: underline;
+  color: #dff3ff;
 }
 
-/* Page Title */
+/* Page Heading */
 h2 {
   text-align: center;
-  margin: 30px 0 20px;
-  color: #0077b6;
+  font-size: 28px;
+  margin-top: 30px;
+  color: #2c3e50;
 }
 
-/* History Container */
+/* History container */
 #history {
   max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #ffffff;
+  margin: 30px auto;
+  background-color: #f9f9f9;
   border-radius: 12px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.05);
+  padding: 20px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  overflow-x: auto;
 }
 
-/* Example style for history records (optional if you dynamically generate them) */
-.history-record {
-  border-bottom: 1px solid #ccc;
-  padding: 12px 0;
-  display: flex;
-  justify-content: space-between;
-  color: #333;
+/* Example table styling inside #history (optional if you use a table) */
+#history table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 16px;
 }
 
-.history-record:last-child {
-  border-bottom: none;
+#history th,
+#history td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
 }
 
-.history-date {
-  font-weight: bold;
-  color: #0077b6;
+#history th {
+  background-color: #2980b9;
+  color: white;
 }
 
-.history-namaz {
-  font-size: 14px;
-  color: #444;
+#history tr:nth-child(even) {
+  background-color: #f2f2f2;
 }
 
-/* Responsive */
+/* Responsive Navbar */
 @media (max-width: 600px) {
   .navbar {
     flex-direction: column;
     align-items: flex-start;
   }
 
-  .navbar div {
-    margin-top: 10px;
+  .navbar h1 {
+    margin-bottom: 10px;
   }
 
   .navbar a,
   .navbar button {
-    margin-left: 0;
-    margin-right: 15px;
+    margin: 5px 0 0;
   }
 
   h2 {
-    font-size: 20px;
+    font-size: 24px;
   }
 
-  .history-record {
-    flex-direction: column;
-    gap: 5px;
+  #history {
+    margin: 20px;
+    padding: 15px;
+  }
+
+  #history table {
+    font-size: 14px;
+  }
+}
+.table-container {
+  overflow-x: auto;
+  margin: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  font-size: 16px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+th, td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #c3ecf9;
+  color: #333;
+}
+
+@media (max-width: 600px) {
+  table {
+    font-size: 14px;
+  }
+
+  th, td {
+    padding: 8px;
   }
 }
